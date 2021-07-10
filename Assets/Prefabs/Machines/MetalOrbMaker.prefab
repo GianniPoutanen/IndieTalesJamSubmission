@@ -106,19 +106,22 @@ MonoBehaviour:
     outputs: []
     processItem: {fileID: -2344824582362086267, guid: 869d57ced57f2af46937081d91793330,
       type: 3}
-    sprite: {fileID: 21300000, guid: 53d3689bbdee4424581be9bc990be2e7, type: 3}
+    sprite: {fileID: 7658851350190208726, guid: 2d6d031c9ba71b74486afaa402b75041,
+      type: 3}
   - type: 2
     inputRestricted: 0
     inputs: []
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 5581aff283e4c0241bb201e93b203225, type: 3}
+    sprite: {fileID: -6931850411753290424, guid: 2d6d031c9ba71b74486afaa402b75041,
+      type: 3}
   stageIndex: 0
   itemBuffer: {fileID: 0}
   heldItem: {fileID: 0}
   machine: {fileID: 0}
   drawGizmoMarkers: 1
+  gm: {fileID: 0}
 --- !u!114 &1201707342303009740
 MonoBehaviour:
   m_ObjectHideFlags: 0

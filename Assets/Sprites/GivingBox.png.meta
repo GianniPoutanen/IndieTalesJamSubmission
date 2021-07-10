@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 3c3a721faf751324fbde6574bace801a
+guid: 2d6d031c9ba71b74486afaa402b75041
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5965451534639150018
-    second: SellMachine_0
+      213: -6931850411753290424
+    second: GivingBox_0
   - first:
-      213: 7772417466780860108
-    second: SellMachine_1
-  - first:
-      213: -8857580367851452815
-    second: SellMachine_2
+      213: 7658851350190208726
+    second: GivingBox_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SellMachine_0
+      name: GivingBox_0
       rect:
         serializedVersion: 2
         x: 0
@@ -114,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3c46018f65763da0800000000000000
-      internalID: -5965451534639150018
+      spriteID: 845cc4be6ce1dcf90800000000000000
+      internalID: -6931850411753290424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SellMachine_1
+      name: GivingBox_1
       rect:
         serializedVersion: 2
         x: 16
@@ -135,29 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cceb389818c2ddb60800000000000000
-      internalID: 7772417466780860108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SellMachine_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1768dbcb59d831580800000000000000
-      internalID: -8857580367851452815
+      spriteID: 6d6bb9389b4b94a60800000000000000
+      internalID: 7658851350190208726
       vertices: []
       indices: 
       edges: []

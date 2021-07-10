@@ -74,7 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40f2eff3172ff3448953031726e521d7, type: 3}
+  m_Sprite: {fileID: 7772417466780860108, guid: 3c3a721faf751324fbde6574bace801a,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,21 +105,24 @@ MonoBehaviour:
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 40f2eff3172ff3448953031726e521d7, type: 3}
+    sprite: {fileID: -8857580367851452815, guid: 3c3a721faf751324fbde6574bace801a,
+      type: 3}
   - type: 0
     inputRestricted: 0
     inputs: []
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 5581aff283e4c0241bb201e93b203225, type: 3}
+    sprite: {fileID: -5965451534639150018, guid: 3c3a721faf751324fbde6574bace801a,
+      type: 3}
   - type: 0
     inputRestricted: 0
     inputs: []
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 5581aff283e4c0241bb201e93b203225, type: 3}
+    sprite: {fileID: 7772417466780860108, guid: 3c3a721faf751324fbde6574bace801a,
+      type: 3}
   stageIndex: 0
   itemBuffer: {fileID: 0}
   heldItem: {fileID: 0}
@@ -158,7 +162,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
