@@ -8,6 +8,7 @@ public class MachineBase : MonoBehaviour
     public int cost;
 
     // Shape of the machine
+    [SerializeField]
     public bool[,] shape;
 
     [SerializeField]
