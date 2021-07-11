@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class WallCell : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class WallCell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
         grid = GameObject.Find("Grid").GetComponent<GridManager>();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -22,17 +22,18 @@ public class WallCell : MonoBehaviour
     {
         if (gm.currentMode == GameManager.GameState.WallBuy && CanDestory() && grid.gm.CanBuyWall())
         {
-            grid.BreakWall(grid.map.WorldToCell(this.transform.position));
+            grid.BreakWall(grid.wallMap.WorldToCell(this.transform.parent.position));
         }
     }
 
     public bool CanDestory()
     {
         int[] x = new int[] { -1, 0, 1, 0 };
-        int[] y = new int[] { 0, 1, 0, - 1 };
-        for (int i = 0; i < 4   ; i++)
+        int[] y = new int[] { 0, 1, 0, -1 };
+        for (int i = 0; i < 4; i++)
         {
-            if (grid.map.GetTile(grid.map.WorldToCell(this.transform.position + new Vector3(x[i],y[i],0))) == floorTile)
+            TileBase tile = grid.floorMap.GetTile(grid.floorMap.WorldToCell(this.transform.parent.position + new Vector3(x[i], y[i], 0)));
+            if (tile == floorTile)
             {
                 return true;
             }

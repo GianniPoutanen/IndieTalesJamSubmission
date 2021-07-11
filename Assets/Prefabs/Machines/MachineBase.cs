@@ -41,7 +41,7 @@ public class MachineBase : MonoBehaviour
                 {
                     if (shape[i, j])
                     {
-                        Vector3Int blockedPosition = grid.map.WorldToCell(this.transform.position);
+                        Vector3Int blockedPosition = grid.wallMap.WorldToCell(this.transform.position);
 
                         grid.AddBlockedPosition(this.transform.position);
                         blockedPositions.Add(blockedPosition);
