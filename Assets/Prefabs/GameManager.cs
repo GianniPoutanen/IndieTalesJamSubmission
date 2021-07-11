@@ -236,4 +236,12 @@ public class GameManager : MonoBehaviour
     {
         machines.Remove(machine);
     }
+
+    public void TryRotate()
+    {
+        if (machineToPlace != null && machineToPlace.GetRotation() != null)
+        {
+            machineToPlace = machineToPlace.GetRotation();
+        }
+    }
 }

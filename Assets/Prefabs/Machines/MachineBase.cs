@@ -6,6 +6,7 @@ public class MachineBase : MonoBehaviour
 {
     public bool jammed;
     public int cost;
+    public MachineBase nextRotation;
 
     // Shape of the machine
     [SerializeField]
@@ -36,6 +37,7 @@ public class MachineBase : MonoBehaviour
             shape = GenerateGridRectangle(width, height);
         }
         SetBlockedPositions();
+
     }
 
     public virtual bool[,] GetShape()
@@ -133,5 +135,10 @@ public class MachineBase : MonoBehaviour
     {
         if (gm.currentMode == GameManager.GameState.Trash)
             GameObject.Destroy(this.gameObject);
+    }
+
+    public MachineBase GetRotation()
+    {
+        return nextRotation;
     }
 }
