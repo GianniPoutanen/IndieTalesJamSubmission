@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2ec2631dcb3f84cb7afee4716f7d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorTile: {fileID: 11400000, guid: 2ba615f16159a9d478f9f9aaa62ddaca, type: 2}
+  floorTile: {fileID: 11400000, guid: f59bec5c53cfe2c41bc2f2ccf7ae994c, type: 2}
 --- !u!61 &3206506429196336289
 BoxCollider2D:
   m_ObjectHideFlags: 0

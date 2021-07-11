@@ -107,6 +107,7 @@ MonoBehaviour:
     - pos: {x: -1, y: 0, z: 0}
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: -4585252961612494119, guid: 7d93d232b2681bc48853df93f9a48a5e,
       type: 3}
@@ -116,6 +117,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 6794614588935098457, guid: 7d93d232b2681bc48853df93f9a48a5e,
       type: 3}
@@ -126,6 +128,7 @@ MonoBehaviour:
     outputRestricted: 1
     outputs:
     - pos: {x: 1, y: 0, z: 0}
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 4145476482268031810, guid: 7d93d232b2681bc48853df93f9a48a5e,
       type: 3}
@@ -135,6 +138,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 6794614588935098457, guid: 7d93d232b2681bc48853df93f9a48a5e,
       type: 3}
@@ -158,10 +162,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jammed: 0
   cost: 5
-  nextRotation: {fileID: 0}
+  nextRotation: {fileID: 2101953873149835649, guid: efcd3682f0124f047850451e4c36c8ce,
+    type: 3}
   offset: {x: 0, y: 0, z: 0}
-  width: 0
-  height: 0
+  width: 1
+  height: 1
 --- !u!61 &7775411896233508113
 BoxCollider2D:
   m_ObjectHideFlags: 0

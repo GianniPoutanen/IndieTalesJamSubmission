@@ -26,6 +26,7 @@ public class SellingMachine : InputOutputMachine
         {
             SellValue();
             StageNext();
+
         }
         else
         {
@@ -48,6 +49,12 @@ public class SellingMachine : InputOutputMachine
 
     public void SellValue()
     {
-        heldValue -= gm.AddMoney(heldValue);
+        int temp = heldValue;
+        heldValue = 0 + gm.AddMoney(heldValue); ;
+        if (heldValue != temp && (this.CurrentStage().effect != null))
+        {
+            GameObject obj = Instantiate(this.CurrentStage().effect);
+            obj.transform.position = this.transform.position;
+        }
     }
 }

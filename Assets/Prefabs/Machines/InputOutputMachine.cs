@@ -107,6 +107,7 @@ public class InputOutputMachine : MonoBehaviour
             }
         }
     }
+
     public void StageUpdateFinished()
     {
         if (itemBuffer != null && heldItem == null)
@@ -289,6 +290,8 @@ public class Stage
     public In[] inputs;
     public bool outputRestricted = false;
     public Out[] outputs;
+
+    public GameObject effect;
 
     public Item processItem;
 

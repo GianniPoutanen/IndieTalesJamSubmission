@@ -7,7 +7,7 @@ public class BuildOptionButton : MonoBehaviour
 {
     // Cost and Machine
     public MachineBase machine;
-    public UnlockList.Unlocks unlock;
+    public UnlockList.Unlocks unlock = UnlockList.Unlocks.none;
 
     public Sprite[] numbers;
     private string valueText;

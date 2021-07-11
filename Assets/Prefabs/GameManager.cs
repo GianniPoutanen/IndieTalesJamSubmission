@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int buildCost;
     public GameObject buildMenu;
     public bool building;
+    public GameObject buildingIndicator;
 
     public List<InputOutputMachine> machines = new List<InputOutputMachine>();
 
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        buildingIndicator.SetActive(currentMode != GameState.Play);
+
         if (currentMode == GameState.Play)
         {
             if (tickTimer <= 0)
@@ -85,6 +88,11 @@ public class GameManager : MonoBehaviour
         if (building && Input.GetMouseButtonDown(0) && CanBuildMachine())
         {
             HandleBuildMachine();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            TryRotate();
         }
     }
 
@@ -142,7 +150,7 @@ public class GameManager : MonoBehaviour
         if (currentMoney + money > maxMoney)
         {
             difference = currentMoney + money - maxMoney;
-            currentMoney = 10;
+            currentMoney = maxMoney;
         }
         else
         {
@@ -224,7 +232,10 @@ public class GameManager : MonoBehaviour
     {
         buyNumber++;
         currentMoney -= wallValue;
-        wallValue = Mathf.FloorToInt(Mathf.Pow((float)buyNumber, wallValueFactorRange));
+        if (buyNumber > 3)
+        {
+            wallValue = Mathf.FloorToInt(Mathf.Pow((float)buyNumber - 3, wallValueFactorRange));
+        }
     }
 
     public void AddMachine(InputOutputMachine machine)

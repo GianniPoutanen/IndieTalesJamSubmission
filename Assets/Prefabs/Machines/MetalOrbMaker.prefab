@@ -106,6 +106,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: -2344824582362086267, guid: 869d57ced57f2af46937081d91793330,
       type: 3}
     sprite: {fileID: 7658851350190208726, guid: 2d6d031c9ba71b74486afaa402b75041,
@@ -116,6 +117,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: -6931850411753290424, guid: 2d6d031c9ba71b74486afaa402b75041,
       type: 3}
@@ -138,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
-  cost: 10
+  cost: 5
   nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   width: 0

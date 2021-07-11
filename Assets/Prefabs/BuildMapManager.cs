@@ -12,6 +12,7 @@ public class BuildMapManager : MonoBehaviour
     GameManager gm;
     GridManager grid;
     public RuleTile markerTile;
+    public TileBase wallTile;
 
     public bool canBuild = false;
 
@@ -87,7 +88,7 @@ public class BuildMapManager : MonoBehaviour
         {
             buildMap.SetTile(buildMap.WorldToCell(cellPos), markerTile);
             TileBase tile = grid.wallMap.GetTile(grid.wallMap.WorldToCell(cellPos));
-            if (!(gm.CanBuyWall() && grid.NextToFloor(cellPos) && tile != null))
+            if (!(gm.CanBuyWall() && grid.NextToFloor(cellPos) && tile == wallTile))
             {
                 buildMap.SetColor(buildMap.WorldToCell(cellPos), new Color(1, 0, 0, 0.5f));
                 canBuild = false;
