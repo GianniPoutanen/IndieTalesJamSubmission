@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class UnlockList : MonoBehaviour
 {
-
-    List<Unlocks> unlockList;
+    [SerializeField]
+    public List<Unlocks> unlockList;
+    private GameManager gm;
 
     public enum Unlocks
     {
@@ -26,6 +27,7 @@ public class UnlockList : MonoBehaviour
     private void Start()
     {
         unlockList = new List<Unlocks>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -36,7 +38,11 @@ public class UnlockList : MonoBehaviour
 
     public void UnlockItem(Unlocks unlock)
     {
-        if (!unlockList.Contains(unlock))
+        if (unlock == Unlocks.firstMoneyMax)
+        {
+            UnlockNextMoneyMax();
+        }
+        else if (!unlockList.Contains(unlock))
         {
             unlockList.Add(unlock);
         }

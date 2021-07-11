@@ -18,10 +18,15 @@ public class GridManager : MonoBehaviour
 
     // Positions on the map blocked by an object/s
     public List<Vector3Int> blockedPositions = new List<Vector3Int>();
+    private Dictionary<Vector3Int, GameObject> markPosition = new Dictionary<Vector3Int, GameObject>();
 
     public void BreakWall(Vector3Int pos)
     {
         floorMap.SetTile(pos, floorTile);
+        if (HasResearchMark(pos))
+        {
+            DestroyResearchMark(pos);
+        }
         wallMap.SetTile(pos, null);
         for (int i = -1; i <= 1; i++)
         {
@@ -80,4 +85,23 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
+    public void AddResearchMark(Vector3 pos, GameObject obj)
+    {
+        markPosition.Add(wallMap.WorldToCell(pos), obj);
+    }
+
+    public bool HasResearchMark(Vector3 pos)
+    {
+        return markPosition.ContainsKey(wallMap.WorldToCell(pos));
+    }
+    public bool HasResearchMark(Vector3Int pos)
+    {
+        return markPosition.ContainsKey(pos);
+    }
+
+    public void DestroyResearchMark(Vector3Int pos)
+    {
+        GameObject.Destroy(markPosition[pos]);
+        markPosition.Remove(wallMap.WorldToCell(pos));
+    }
 }

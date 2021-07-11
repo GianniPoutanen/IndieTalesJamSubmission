@@ -11,6 +11,7 @@ public class PlayerMovemet : MonoBehaviour
     public float speed;
 
     public Item heldItem;
+    public SpriteRenderer itemInHand;
 
     // Start is called before the first frame update
     void Start()
@@ -111,6 +112,21 @@ public class PlayerMovemet : MonoBehaviour
         if (endPosition != this.transform.position)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, endPosition, speed);
+        }
+
+        HandleHeldItem();
+    }
+
+    public void HandleHeldItem ()
+    {
+        if (heldItem == null)
+        {
+            itemInHand.sprite = null;
+        }
+        else
+        {
+            itemInHand.sprite = heldItem.GetComponent<SpriteRenderer>().sprite;
+
         }
     }
 }
