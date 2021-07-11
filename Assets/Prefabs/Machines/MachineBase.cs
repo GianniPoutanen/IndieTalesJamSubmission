@@ -14,6 +14,8 @@ public class MachineBase : MonoBehaviour
     [SerializeField]
     public Vector3 offset;
     protected List<Vector3Int> blockedPositions = new List<Vector3Int>();
+    public int width;
+    public int height;
 
     protected GridManager grid;
     protected GameManager gm;
@@ -26,7 +28,12 @@ public class MachineBase : MonoBehaviour
         this.tag = "Machine";
         if (shape == null)
         {
-            shape = GenerateGridRectangle(1, 1);
+            if (width == 0)
+                width = 1;
+            if (height == 0)
+                height = 1;
+
+            shape = GenerateGridRectangle(width, height);
         }
         SetBlockedPositions();
     }
@@ -35,7 +42,12 @@ public class MachineBase : MonoBehaviour
     {
         if (shape == null)
         {
-            shape = GenerateGridRectangle(1, 1);
+            if (width == 0)
+                width = 1;
+            if (height == 0)
+                height = 1;
+
+            shape = GenerateGridRectangle(width, height);
         }
         return shape;
     }
@@ -52,7 +64,7 @@ public class MachineBase : MonoBehaviour
                     {
                         Vector3Int blockedPosition = grid.wallMap.WorldToCell(this.transform.position);
 
-                        grid.AddBlockedPosition(this.transform.position);
+                        grid.AddBlockedPosition(this.transform.position + new Vector3(-(width / 2) + i, -(height / 2) + j, 0));
                         blockedPositions.Add(blockedPosition);
                     }
                 }

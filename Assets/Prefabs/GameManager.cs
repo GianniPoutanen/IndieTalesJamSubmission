@@ -99,10 +99,11 @@ public class GameManager : MonoBehaviour
 
     public void HandleBuildMachine()
     {
-        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) +
+               new Vector3(((1 + machineToPlace.width % 2) * 0.5f), ((1 + machineToPlace.height % 2) * 0.5f), 0);
         fixedPos = Vector3Int.RoundToInt(fixedPos);
         GameObject newMachine = Instantiate(machineToPlace.gameObject);
-        newMachine.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
+        newMachine.transform.position = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
 
         this.currentMoney -= buildCost;
         if (!Input.GetKey(KeyCode.LeftShift))
@@ -114,12 +115,16 @@ public class GameManager : MonoBehaviour
 
     public void SetCurserObjectPosition()
     {
-        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (building)
+        if (machineToPlace != null)
         {
-            fixedPos = Vector3Int.RoundToInt(fixedPos);
+            Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) +
+                new Vector3(((1 + machineToPlace.width % 2) * 0.5f), ((1 + machineToPlace.height % 2) * 0.5f), 0);
+            if (building)
+            {
+                fixedPos = Vector3Int.RoundToInt(fixedPos);
+            }
+            curserObject.transform.position = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
         }
-        curserObject.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
     }
 
     private void OnEnable()

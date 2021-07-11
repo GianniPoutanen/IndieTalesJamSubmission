@@ -66,7 +66,7 @@ public class InputOutputMachine : MonoBehaviour
         {
             if (this.CurrentStage().type == Stage.StageType.Processs)
             {
-                if (heldItem == null)
+                if (heldItem != this.CurrentStage().processItem)
                 {
                     heldItem = this.CurrentStage().processItem;
                     StageNext();

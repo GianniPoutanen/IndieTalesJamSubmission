@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
+  m_Sprite: {fileID: 2537166191097312567, guid: d51daece31e9777468c9c95e3a5ab468,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
     outputs: []
     processItem: {fileID: -2344824582362086267, guid: 869d57ced57f2af46937081d91793330,
       type: 3}
-    sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
+    sprite: {fileID: 2537166191097312567, guid: d51daece31e9777468c9c95e3a5ab468,
       type: 3}
   - type: 0
     inputRestricted: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 4939955736737980522, guid: adfcfa0459a156e4eaa0c7bc02b24235,
+    sprite: {fileID: 4370725787720381746, guid: d51daece31e9777468c9c95e3a5ab468,
       type: 3}
   - type: 0
     inputRestricted: 0
@@ -127,15 +127,7 @@ MonoBehaviour:
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 294900110765676944, guid: adfcfa0459a156e4eaa0c7bc02b24235, type: 3}
-  - type: 0
-    inputRestricted: 0
-    inputTypeRestriction: {fileID: 0}
-    inputs: []
-    outputRestricted: 0
-    outputs: []
-    processItem: {fileID: 0}
-    sprite: {fileID: 4939955736737980522, guid: adfcfa0459a156e4eaa0c7bc02b24235,
+    sprite: {fileID: 6963732724747147705, guid: d51daece31e9777468c9c95e3a5ab468,
       type: 3}
   - type: 0
     inputRestricted: 0
@@ -144,7 +136,36 @@ MonoBehaviour:
     outputRestricted: 0
     outputs: []
     processItem: {fileID: 0}
-    sprite: {fileID: 294900110765676944, guid: adfcfa0459a156e4eaa0c7bc02b24235, type: 3}
+    sprite: {fileID: -2364654261401271981, guid: d51daece31e9777468c9c95e3a5ab468,
+      type: 3}
+  - type: 0
+    inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
+    inputs: []
+    outputRestricted: 0
+    outputs: []
+    processItem: {fileID: 0}
+    sprite: {fileID: 6505532079662355672, guid: d51daece31e9777468c9c95e3a5ab468,
+      type: 3}
+  - type: 5
+    inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
+    inputs: []
+    outputRestricted: 0
+    outputs: []
+    processItem: {fileID: 4453191663987988664, guid: 89e501f9f40660b489a92b897fda5d80,
+      type: 3}
+    sprite: {fileID: 7946996008295243437, guid: d51daece31e9777468c9c95e3a5ab468,
+      type: 3}
+  - type: 2
+    inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
+    inputs: []
+    outputRestricted: 0
+    outputs: []
+    processItem: {fileID: 0}
+    sprite: {fileID: -5242160997246089613, guid: d51daece31e9777468c9c95e3a5ab468,
+      type: 3}
   stageIndex: 0
   itemBuffer: {fileID: 0}
   heldItem: {fileID: 0}
@@ -166,6 +187,8 @@ MonoBehaviour:
   jammed: 0
   cost: 0
   offset: {x: 0, y: 0, z: 0}
+  width: 2
+  height: 1
 --- !u!61 &7987872236647236262
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,14 +206,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.25}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &7987872236647236260
 Rigidbody2D:
