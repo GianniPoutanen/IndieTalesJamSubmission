@@ -10,6 +10,8 @@ public class UnlockList : MonoBehaviour
 
     public enum Unlocks
     {
+        // None
+        None,
         // Machines
         grabber,
         melter,

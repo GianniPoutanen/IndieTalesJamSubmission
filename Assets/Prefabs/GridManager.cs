@@ -15,6 +15,7 @@ public class GridManager : MonoBehaviour
     public RuleTile wallTile;
     public RuleTile floorTile;
     public TileBase innerWallTile;
+    public TileBase belowWallTile;
 
     // Positions on the map blocked by an object/s
     public List<Vector3Int> blockedPositions = new List<Vector3Int>();
@@ -35,13 +36,19 @@ public class GridManager : MonoBehaviour
                 Vector3Int tempOffset = new Vector3Int(i, j, 0);
                 if (wallMap.GetTile(pos + tempOffset) == null && floorMap.GetTile(pos + tempOffset) == null)
                 {
-                    if (!AboveFloor(pos + tempOffset))
+                    //TODO fix this
+                    if (AboveFloor(pos + tempOffset))
                     {
                         wallMap.SetTile(pos + tempOffset, wallTile);
                     }
+                    else if (BelowFloor(pos + tempOffset))
+                    {
+                        wallMap.SetTile(pos + tempOffset, wallTile);
+
+                    }
                     else
                     {
-                        wallMap.SetTile(pos + tempOffset, innerWallTile);
+                        wallMap.SetTile(pos + tempOffset, wallTile);
                     }
                 }
             }
@@ -51,7 +58,7 @@ public class GridManager : MonoBehaviour
 
     public bool AboveFloor(Vector3Int initialPos)
     {
-        TileBase tile = floorMap.GetTile(floorMap.WorldToCell(initialPos + new Vector3(0, -1, 0)));
+        TileBase tile = floorMap.GetTile(floorMap.WorldToCell(initialPos ));
         if (tile == floorTile)
         {
             return true;
@@ -59,9 +66,39 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+    public bool BelowFloor(Vector3Int initialPos)
+    {
+        TileBase tile = floorMap.GetTile(floorMap.WorldToCell(initialPos + new Vector3Int(-3, 1, 0)));
+        if (tile == floorTile)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool NextToFloor(Vector3 pos)
+    {
+        int[] x = new int[] { -1, 0, 1, 0 };
+        int[] y = new int[] { 0, 1, 0, -1 };
+        for (int i = 0; i < 4; i++)
+        {
+            TileBase tile = floorMap.GetTile(floorMap.WorldToCell(pos + new Vector3(x[i], y[i], 0)));
+            if (tile == floorTile)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void AddBlockedPosition(Vector3 pos)
     {
         blockedPositions.Add(this.GetComponent<Grid>().WorldToCell(pos));
+    }
+    public void RemoveBlockedPosition(Vector3 pos)
+    {
+        blockedPositions.Remove(this.GetComponent<Grid>().WorldToCell(pos));
     }
 
     public bool CheckPositionFree(Vector3Int pos)

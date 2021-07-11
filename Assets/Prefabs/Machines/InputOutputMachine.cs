@@ -31,6 +31,10 @@ public class InputOutputMachine : MonoBehaviour
         machine = this.GetComponent<MachineBase>();
     }
 
+    private void OnDestroy()
+    {
+        gm.RemoveMachine(this);
+    }
 
     // Update is called once per frame
     void Update()
@@ -223,10 +227,13 @@ public class InputOutputMachine : MonoBehaviour
 
     public static InputOutputMachine GetMachineAtPoint(Vector3 pos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
-        if (hit.transform != null && hit.transform.gameObject != null)
+        RaycastHit2D[] hits= Physics2D.RaycastAll(pos, Vector2.zero, 0f);
+        foreach(RaycastHit2D hit in hits)
         {
-            return hit.transform.gameObject.GetComponent<InputOutputMachine>();
+            if (hit.transform != null && hit.transform.gameObject != null && hit.transform.tag == "Machine")
+            {
+                return hit.transform.gameObject.GetComponent<InputOutputMachine>();
+            }
         }
         return null;
     }
@@ -278,6 +285,7 @@ public class Stage
     public StageType type;
 
     public bool inputRestricted = false;
+    public GameObject inputTypeRestriction;
     public In[] inputs;
     public bool outputRestricted = false;
     public Out[] outputs;

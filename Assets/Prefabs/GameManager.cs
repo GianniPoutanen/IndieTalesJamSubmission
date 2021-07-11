@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         Play,
         Build,
+        Trash,
         WallBuy,
         Pause
     }
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         tickTimer = tickTime;
     }
 
@@ -56,7 +58,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        curserObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             HandleMenuEscape();
@@ -65,16 +66,65 @@ public class GameManager : MonoBehaviour
         {
             if (buildMenu.activeSelf)
             {
+                ClearBuildObject();
                 buildMenu.SetActive(false);
                 currentMode = GameState.Play;
+                Cursor.visible = false;
             }
             else
             {
+                ClearBuildObject();
                 buildMenu.SetActive(true);
-                currentMode = GameState.Build;
+                currentMode = GameState.Pause;
+                Cursor.visible = true;
             }
         }
 
+        SetCurserObjectPosition();
+
+        if (building && Input.GetMouseButtonDown(0) && CanBuildMachine())
+        {
+            HandleBuildMachine();
+        }
+    }
+
+    public bool CanBuildMachine()
+    {
+        return buildCost <= currentMoney;
+    }
+    public bool CanBuildMachine(int cost)
+    {
+        return cost <= currentMoney;
+    }
+
+    public void HandleBuildMachine()
+    {
+        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        fixedPos = Vector3Int.RoundToInt(fixedPos);
+        GameObject newMachine = Instantiate(machineToPlace.gameObject);
+        newMachine.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
+
+        this.currentMoney -= buildCost;
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            ClearBuildObject();
+            currentMode = GameState.Play;
+        }
+    }
+
+    public void SetCurserObjectPosition()
+    {
+        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (building)
+        {
+            fixedPos = Vector3Int.RoundToInt(fixedPos);
+        }
+        curserObject.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
+    }
+
+    private void OnEnable()
+    {
+        Cursor.visible = true;
     }
 
     /// <summary>
@@ -102,19 +152,19 @@ public class GameManager : MonoBehaviour
         {
             ClearBuildObject();
             buildMenu.SetActive(true);
+            ClearBuildObject();
         }
         else if (buildMenu.activeSelf)
         {
+            currentMode = GameState.Play;
             buildMenu.SetActive(false);
         }
-        else if (currentMode == GameState.Build)
-        {
-            currentMode = GameState.Play;
-        }
-        else if (currentMode == GameState.WallBuy)
+        else if (currentMode == GameState.WallBuy || currentMode == GameState.Build || currentMode == GameState.Trash)
         {
             buildMenu.SetActive(true);
-            currentMode = GameState.Build;
+            currentMode = GameState.Pause;
+            currentMode = GameState.Play;
+            Cursor.visible = true;
         }
     }
 
@@ -122,12 +172,14 @@ public class GameManager : MonoBehaviour
     {
         this.currentMode = GameState.WallBuy;
         buildMenu.SetActive(false);
+        Cursor.visible = true;
     }
     public void SetBuildObject(MachineBase obj, int cost)
     {
         buildCost = cost;
         machineToPlace = obj;
         curserObject.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+        currentMode = GameState.Build;
         building = true;
     }
 
@@ -136,6 +188,7 @@ public class GameManager : MonoBehaviour
         buildCost = 0;
         machineToPlace = null;
         curserObject.GetComponent<SpriteRenderer>().sprite = null;
+        currentMode = GameState.Pause;
         building = false;
     }
     private void UpdateMachineStates()
@@ -172,5 +225,10 @@ public class GameManager : MonoBehaviour
     public void AddMachine(InputOutputMachine machine)
     {
         machines.Add(machine);
+    }
+
+    public void RemoveMachine(InputOutputMachine machine)
+    {
+        machines.Remove(machine);
     }
 }

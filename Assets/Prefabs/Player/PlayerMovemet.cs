@@ -24,6 +24,19 @@ public class PlayerMovemet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (endPosition != this.transform.position)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, endPosition, speed);
+        }
+
+        HandleHeldItem();
+
+        if (gm.currentMode == GameManager.GameState.Play)
+            HandlePlayerMovement();
+    }
+
+    private void HandlePlayerMovement()
+    {
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (grid.CheckPositionFree(this.transform.position + new Vector3(0, 1, 0)))
@@ -109,15 +122,9 @@ public class PlayerMovemet : MonoBehaviour
             }
         }
 
-        if (endPosition != this.transform.position)
-        {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, endPosition, speed);
-        }
-
-        HandleHeldItem();
     }
 
-    public void HandleHeldItem ()
+    public void HandleHeldItem()
     {
         if (heldItem == null)
         {

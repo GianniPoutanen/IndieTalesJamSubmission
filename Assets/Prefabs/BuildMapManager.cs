@@ -31,6 +31,10 @@ public class BuildMapManager : MonoBehaviour
         {
             SetMarkers(gm.machineToPlace.GetShape(), Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
+        else if (gm.currentMode == GameManager.GameState.WallBuy)
+        {
+            SetWallMarkers(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
         else
         {
             ClearMarkers();
@@ -56,6 +60,34 @@ public class BuildMapManager : MonoBehaviour
         {
             buildMap.SetTile(buildMap.WorldToCell(cellPos), markerTile);
             if (!grid.CheckPositionFree(buildMap.WorldToCell(cellPos)))
+            {
+                buildMap.SetColor(buildMap.WorldToCell(cellPos), new Color(1, 0, 0, 0.5f));
+                canBuild = false;
+            }
+            else
+            {
+                buildMap.SetColor(buildMap.WorldToCell(cellPos), new Color(0, 1, 0, 0.5f));
+
+            }
+        }
+    }
+    public void SetWallMarkers(Vector2 initPos)
+    {
+        ClearMarkers();
+
+        Vector2 pos = new Vector2(0, -0.5f) + initPos;
+
+        previousMarkerPostiions.Clear();
+
+        previousMarkerPostiions.Add(pos);
+
+
+        canBuild = true;
+        foreach (Vector2 cellPos in previousMarkerPostiions)
+        {
+            buildMap.SetTile(buildMap.WorldToCell(cellPos), markerTile);
+            TileBase tile = grid.wallMap.GetTile(grid.wallMap.WorldToCell(cellPos));
+            if (!(gm.CanBuyWall() && grid.NextToFloor(cellPos) && tile != null))
             {
                 buildMap.SetColor(buildMap.WorldToCell(cellPos), new Color(1, 0, 0, 0.5f));
                 canBuild = false;
