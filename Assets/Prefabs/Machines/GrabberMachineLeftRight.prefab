@@ -102,6 +102,7 @@ MonoBehaviour:
   stages:
   - type: 1
     inputRestricted: 1
+    inputTypeRestriction: {fileID: 0}
     inputs:
     - pos: {x: -1, y: 0, z: 0}
     outputRestricted: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
@@ -119,6 +121,7 @@ MonoBehaviour:
       type: 3}
   - type: 2
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 1
     outputs:
@@ -128,6 +131,7 @@ MonoBehaviour:
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
@@ -135,9 +139,11 @@ MonoBehaviour:
     sprite: {fileID: 6794614588935098457, guid: 7d93d232b2681bc48853df93f9a48a5e,
       type: 3}
   stageIndex: 0
+  itemBuffer: {fileID: 0}
   heldItem: {fileID: 0}
   machine: {fileID: 0}
   drawGizmoMarkers: 1
+  gm: {fileID: 0}
 --- !u!114 &7775411896233508112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +157,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
+  cost: 5
+  nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  width: 0
+  height: 0
 --- !u!61 &7775411896233508113
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -101,6 +101,7 @@ MonoBehaviour:
   stages:
   - type: 7
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
@@ -109,6 +110,7 @@ MonoBehaviour:
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
@@ -117,6 +119,7 @@ MonoBehaviour:
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
@@ -144,7 +147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
+  cost: 10
+  nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  width: 1
+  height: 1
 --- !u!61 &-659938641258635227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -161,7 +168,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5

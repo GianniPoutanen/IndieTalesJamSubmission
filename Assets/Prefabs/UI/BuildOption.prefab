@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machine: {fileID: 0}
-  cost: 0
+  unlock: 0
   numbers:
   - {fileID: -6629531029891648246, guid: 0ae7b2c5d48efd14589683383d8e1cdc, type: 3}
   - {fileID: -4217592887472625829, guid: 0ae7b2c5d48efd14589683383d8e1cdc, type: 3}
@@ -237,5 +237,6 @@ MonoBehaviour:
   - {fileID: 849386610096671516, guid: 0ae7b2c5d48efd14589683383d8e1cdc, type: 3}
   numberImage: {fileID: 7164371913220371584, guid: 778e15efda8f3a1478d7cf867f8d417c,
     type: 3}
-  imageNumGap: 15
-  yPos: -20
+  imageNumGap: 12
+  yPos: -16
+  xPos: 30

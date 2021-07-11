@@ -51,7 +51,7 @@ public class PlayerMovemet : MonoBehaviour
                     this.heldItem = machine.heldItem;
                     machine.heldItem = null;
                 }
-                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(0, 1, 0)) && machine.heldItem == null)
+                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(0, 1, 0), this.heldItem) && machine.heldItem == null)
                 {
                     machine.itemBuffer = this.heldItem;
                     this.heldItem = null;
@@ -72,7 +72,7 @@ public class PlayerMovemet : MonoBehaviour
                     this.heldItem = machine.heldItem;
                     machine.heldItem = null;
                 }
-                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(0, -1, 0)) && machine.heldItem == null)
+                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(0, -1, 0), this.heldItem) && machine.heldItem == null)
                 {
                     machine.itemBuffer = this.heldItem;
                     this.heldItem = null;
@@ -81,6 +81,7 @@ public class PlayerMovemet : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            this.transform.localScale = new Vector3(1, 1, 1);
             if (grid.CheckPositionFree(this.transform.position + new Vector3(1, 0, 0)))
             {
                 endPosition += new Vector3Int(1, 0, 0);
@@ -93,7 +94,7 @@ public class PlayerMovemet : MonoBehaviour
                     this.heldItem = machine.heldItem;
                     machine.heldItem = null;
                 }
-                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(1, 0, 0)) && machine.heldItem == null)
+                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(1, 0, 0), this.heldItem) && machine.heldItem == null)
                 {
                     machine.itemBuffer = this.heldItem;
                     this.heldItem = null;
@@ -102,6 +103,7 @@ public class PlayerMovemet : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
+            this.transform.localScale = new Vector3(-1, 1, 1);
             if (grid.CheckPositionFree(this.transform.position + new Vector3(-1, 0, 0)))
             {
                 endPosition += new Vector3Int(-1, 0, 0);
@@ -114,7 +116,7 @@ public class PlayerMovemet : MonoBehaviour
                     this.heldItem = machine.heldItem;
                     machine.heldItem = null;
                 }
-                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(-1, 0, 0)) && machine.heldItem == null)
+                else if (machine != null && machine.CanAcceptInput(this.transform.position, this.transform.position + new Vector3Int(-1, 0, 0), this.heldItem) && machine.heldItem == null)
                 {
                     machine.itemBuffer = this.heldItem;
                     this.heldItem = null;

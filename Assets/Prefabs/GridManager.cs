@@ -13,7 +13,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Tile Variables")]
     public RuleTile wallTile;
-    public RuleTile floorTile;
+    public TileBase floorTile;
     public TileBase innerWallTile;
     public TileBase belowWallTile;
 

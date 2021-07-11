@@ -15,7 +15,7 @@ public class SellingMachine : InputOutputMachine
         }
     }
 
-    public override bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition)
+    public override bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition, Item item)
     {
         return true;
     }

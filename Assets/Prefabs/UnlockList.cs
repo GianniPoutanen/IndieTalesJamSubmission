@@ -11,10 +11,11 @@ public class UnlockList : MonoBehaviour
     public enum Unlocks
     {
         // None
-        None,
+        none,
         // Machines
         grabber,
         melter,
+        Press,
         // Game Upgrades
         twoSpeed,
         fourSpeed,
@@ -33,7 +34,7 @@ public class UnlockList : MonoBehaviour
     }
 
 
-    public bool IsUnlcoked(Unlocks unlock)
+    public bool IsUnlocked(Unlocks unlock)
     {
         return unlockList.Contains(unlock);
     }

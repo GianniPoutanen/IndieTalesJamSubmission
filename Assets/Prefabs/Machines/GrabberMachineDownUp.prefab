@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
-  cost: 0
+  cost: 5
+  nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   width: 0
   height: 0

@@ -102,7 +102,7 @@ MonoBehaviour:
   stages:
   - type: 1
     inputRestricted: 0
-    inputTypeRestriction: {fileID: 4830273277510470798, guid: 89e501f9f40660b489a92b897fda5d80,
+    inputTypeRestriction: {fileID: 4453191663987988664, guid: 89e501f9f40660b489a92b897fda5d80,
       type: 3}
     inputs: []
     outputRestricted: 0
@@ -172,6 +172,15 @@ MonoBehaviour:
       type: 3}
     sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
       type: 3}
+  - type: 2
+    inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
+    inputs: []
+    outputRestricted: 0
+    outputs: []
+    processItem: {fileID: 0}
+    sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
+      type: 3}
   stageIndex: 0
   itemBuffer: {fileID: 0}
   heldItem: {fileID: 0}
@@ -191,7 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
-  cost: 0
+  cost: 40
+  nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   width: 0
   height: 0
