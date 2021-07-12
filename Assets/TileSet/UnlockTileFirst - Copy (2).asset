@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: UnlockTileFirst - Copy (2)
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: d6ff9bc3c65c55a478097f08ddce33c4, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: e7bad3893763071439b544ab737a0020, type: 3}
   m_DefaultGameObject: {fileID: 641141084164100513, guid: 8e5021517e4934044bb26385c460ecbd,
     type: 3}
   m_DefaultColliderType: 1

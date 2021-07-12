@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public MachineBase machineToPlace;
     public int buildCost;
     public GameObject buildMenu;
+    public GameObject pauseMenu;
     public bool building;
     public GameObject buildingIndicator;
 
@@ -32,13 +33,19 @@ public class GameManager : MonoBehaviour
     public float tickTime = 2;
     private float tickTimer;
 
+    public bool musicOn = true;
+    public bool soundEffectsOn = true;
+
+    public AudioSource musicPlayer;
+
     public enum GameState
     {
         Play,
         Build,
         Trash,
         WallBuy,
-        Pause
+        Pause,
+        Credits
     }
     public GameState currentMode;
 
@@ -47,13 +54,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         tickTimer = tickTime;
         grid = GameObject.Find("Grid").GetComponent<GridManager>();
+        musicPlayer = this.GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        buildingIndicator.SetActive(currentMode != GameState.Play);
+        buildingIndicator.SetActive(currentMode != GameState.Play && !pauseMenu.activeSelf);
 
-        if (currentMode == GameState.Play)
+        if (currentMode == GameState.Play || currentMode == GameState.WallBuy)
         {
             if (tickTimer <= 0)
             {
@@ -70,7 +78,7 @@ public class GameManager : MonoBehaviour
         {
             HandleMenuEscape();
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && !pauseMenu.activeSelf)
         {
             if (buildMenu.activeSelf)
             {
@@ -192,9 +200,19 @@ public class GameManager : MonoBehaviour
 
     public void HandleMenuEscape()
     {
-        currentMode = GameState.Play;
-        buildMenu.SetActive(false);
-        Cursor.visible = false;
+        if (currentMode == GameState.Play)
+        {
+            pauseMenu.SetActive(true);
+            currentMode = GameState.Pause;
+            Cursor.visible = true;
+        }
+        else
+        {
+            currentMode = GameState.Play;
+            pauseMenu.SetActive(false);
+            buildMenu.SetActive(false);
+            Cursor.visible = false;
+        }
     }
 
     public void SetBuyWallMode()
@@ -270,5 +288,20 @@ public class GameManager : MonoBehaviour
         {
             machineToPlace = machineToPlace.GetRotation();
         }
+    }
+
+    public void ToggleMusic()
+    {
+        musicOn = !musicOn;
+        musicPlayer.mute = !musicOn;
+    }
+    public void ToggleSound()
+    {
+        soundEffectsOn = !soundEffectsOn;
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 }

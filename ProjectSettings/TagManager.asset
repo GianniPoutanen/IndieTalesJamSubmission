@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Controls
+    uniqueID: 417455269
+    locked: 0
   - name: Floor
     uniqueID: 4174547963
     locked: 0

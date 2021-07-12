@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
-  cost: 100000
+  cost: 10000
   nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   width: 5

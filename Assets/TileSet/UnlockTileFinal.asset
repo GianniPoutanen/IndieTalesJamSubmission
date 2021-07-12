@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: UnlockTileFinal
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: a09ac7d2e9af2db45898d1b5eaa8e222, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: e7bad3893763071439b544ab737a0020, type: 3}
   m_DefaultGameObject: {fileID: 4676756130169978781, guid: 5fc00a52eb54438499d4168db959c6a5,
     type: 3}
   m_DefaultColliderType: 1
