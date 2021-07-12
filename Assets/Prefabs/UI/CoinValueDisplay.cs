@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CoinValueDisplay : MonoBehaviour
 {
-    private int value;
+    private int value = -1;
     private string valueText;
     public int imageNumGap;
     public int yPos;

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,13 +8,15 @@ public class GridManager : MonoBehaviour
     public Tilemap wallMap;
     public Tilemap buildMap;
     public Tilemap floorMap;
+    public Tilemap unlockMap;
     public GameManager gm;
 
     [Header("Tile Variables")]
     public RuleTile wallTile;
-    public RuleTile floorTile;
+    public TileBase floorTile;
     public TileBase innerWallTile;
     public TileBase belowWallTile;
+
 
     // Positions on the map blocked by an object/s
     public List<Vector3Int> blockedPositions = new List<Vector3Int>();
@@ -37,18 +38,18 @@ public class GridManager : MonoBehaviour
                 if (wallMap.GetTile(pos + tempOffset) == null && floorMap.GetTile(pos + tempOffset) == null)
                 {
                     //TODO fix this
-                    if (AboveFloor(pos + tempOffset))
+                    if (unlockMap.GetTile(pos + tempOffset) == null)
                     {
                         wallMap.SetTile(pos + tempOffset, wallTile);
-                    }
-                    else if (BelowFloor(pos + tempOffset))
-                    {
-                        wallMap.SetTile(pos + tempOffset, wallTile);
-
                     }
                     else
                     {
-                        wallMap.SetTile(pos + tempOffset, wallTile);
+                        wallMap.SetTile(pos + tempOffset, unlockMap.GetTile(pos + tempOffset));
+
+                    }
+                    if (HasResearchMark(pos + tempOffset))
+                    {
+                        markPosition[pos + tempOffset].SetActive(true);
                     }
                 }
             }
@@ -58,7 +59,7 @@ public class GridManager : MonoBehaviour
 
     public bool AboveFloor(Vector3Int initialPos)
     {
-        TileBase tile = floorMap.GetTile(floorMap.WorldToCell(initialPos ));
+        TileBase tile = floorMap.GetTile(floorMap.WorldToCell(initialPos));
         if (tile == floorTile)
         {
             return true;
@@ -121,6 +122,7 @@ public class GridManager : MonoBehaviour
         }
         return true;
     }
+
 
     public void AddResearchMark(Vector3 pos, GameObject obj)
     {

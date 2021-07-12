@@ -7,7 +7,7 @@ public class BuildOptionButton : MonoBehaviour
 {
     // Cost and Machine
     public MachineBase machine;
-    public UnlockList.Unlocks unlock;
+    public UnlockList.Unlocks unlock = UnlockList.Unlocks.none;
 
     public Sprite[] numbers;
     private string valueText;
@@ -16,12 +16,20 @@ public class BuildOptionButton : MonoBehaviour
 
     public int imageNumGap;
     public int yPos;
+    public int xPos;
 
     public void OnClick()
     {
+
         if (GameObject.Find("GameManager").GetComponent<GameManager>().CanBuildMachine(machine.cost))
+        {
             GameObject.Find("GameManager").GetComponent<GameManager>().SetBuildObject(machine, machine.cost);
-        this.transform.parent.gameObject.SetActive(false);
+            this.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+
+        }
     }
 
     public void OnEnable()
@@ -44,7 +52,7 @@ public class BuildOptionButton : MonoBehaviour
             number.transform.SetParent(this.transform);
             cullNumbers.Enqueue(number);
             number.GetComponent<Image>().sprite = numbers[spriteNumber];
-            number.GetComponent<RectTransform>().anchoredPosition = new Vector2(imageNumGap * (i + 1), yPos);
+            number.GetComponent<RectTransform>().anchoredPosition = new Vector2(-imageNumGap * (i + 1) + xPos, yPos);
         }
     }
 }

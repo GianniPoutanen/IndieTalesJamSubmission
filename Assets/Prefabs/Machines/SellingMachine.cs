@@ -8,16 +8,23 @@ public class SellingMachine : InputOutputMachine
     public int heldValue;
     private void Update()
     {
-        if (this.heldItem != null)
+        if (this.itemBuffer != null )
+        {
+            this.heldItem = this.itemBuffer;
+            AddValue();
+            this.heldItem = null;
+            this.itemBuffer = null;
+        }
+        else if (this.heldItem != null)
         {
             AddValue();
             this.heldItem = null;
         }
     }
 
-    public override bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition)
+    public override bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition, Item item)
     {
-        return true;
+        return this.itemBuffer == null;
     }
 
     public override void StageUpdate()
@@ -26,10 +33,11 @@ public class SellingMachine : InputOutputMachine
         {
             SellValue();
             StageNext();
+
         }
         else
         {
-            base.StageUpdate();
+            StageNext();
         }
     }
 
@@ -48,6 +56,12 @@ public class SellingMachine : InputOutputMachine
 
     public void SellValue()
     {
-        heldValue -= gm.AddMoney(heldValue);
+        int temp = heldValue;
+        heldValue = 0 + gm.AddMoney(heldValue); ;
+        if (heldValue != temp && (this.CurrentStage().effect != null))
+        {
+            GameObject obj = Instantiate(this.CurrentStage().effect);
+            obj.transform.position = this.transform.position;
+        }
     }
 }

@@ -19,13 +19,24 @@ public class GameManager : MonoBehaviour
     public MachineBase machineToPlace;
     public int buildCost;
     public GameObject buildMenu;
+    public GameObject pauseMenu;
     public bool building;
+    public GameObject buildingIndicator;
+
+    public GameObject inputMarker;
+    public GameObject outputMarker;
 
     public List<InputOutputMachine> machines = new List<InputOutputMachine>();
+    GridManager grid;
 
     [Header("Timer Variables")]
     public float tickTime = 2;
     private float tickTimer;
+
+    public bool musicOn = true;
+    public bool soundEffectsOn = true;
+
+    public AudioSource musicPlayer;
 
     public enum GameState
     {
@@ -33,7 +44,8 @@ public class GameManager : MonoBehaviour
         Build,
         Trash,
         WallBuy,
-        Pause
+        Pause,
+        Credits
     }
     public GameState currentMode;
 
@@ -41,11 +53,15 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         tickTimer = tickTime;
+        grid = GameObject.Find("Grid").GetComponent<GridManager>();
+        musicPlayer = this.GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if (currentMode == GameState.Play)
+        buildingIndicator.SetActive(currentMode != GameState.Play && !pauseMenu.activeSelf);
+
+        if (currentMode == GameState.Play || currentMode == GameState.WallBuy)
         {
             if (tickTimer <= 0)
             {
@@ -62,7 +78,7 @@ public class GameManager : MonoBehaviour
         {
             HandleMenuEscape();
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && !pauseMenu.activeSelf)
         {
             if (buildMenu.activeSelf)
             {
@@ -82,9 +98,15 @@ public class GameManager : MonoBehaviour
 
         SetCurserObjectPosition();
 
-        if (building && Input.GetMouseButtonDown(0) && CanBuildMachine())
+        if (building && Input.GetMouseButtonDown(0))
         {
-            HandleBuildMachine();
+            if (CanBuildMachine() && grid.buildMap.GetComponent<BuildMapManager>().canBuild)
+                HandleBuildMachine();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            TryRotate();
         }
     }
 
@@ -99,27 +121,50 @@ public class GameManager : MonoBehaviour
 
     public void HandleBuildMachine()
     {
-        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) +
+               new Vector3(((1 + machineToPlace.width % 2) * 0.5f), ((1 + machineToPlace.height % 2) * 0.5f), 0);
         fixedPos = Vector3Int.RoundToInt(fixedPos);
         GameObject newMachine = Instantiate(machineToPlace.gameObject);
-        newMachine.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
+        newMachine.transform.position = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
 
         this.currentMoney -= buildCost;
         if (!Input.GetKey(KeyCode.LeftShift))
         {
             ClearBuildObject();
-            currentMode = GameState.Play;
+            currentMode = GameState.Pause;
+            buildMenu.SetActive(true);
         }
     }
 
     public void SetCurserObjectPosition()
     {
-        Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (building)
+        if (machineToPlace != null)
         {
-            fixedPos = Vector3Int.RoundToInt(fixedPos);
+            Vector3 fixedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) +
+                new Vector3(((1 + machineToPlace.width % 2) * 0.5f), ((1 + machineToPlace.height % 2) * 0.5f), 0);
+            if (building)
+            {
+                fixedPos = Vector3Int.RoundToInt(fixedPos);
+                fixedPos = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
+                if (machineToPlace.inputMaker != null)
+                {
+                    inputMarker.transform.position = machineToPlace.inputMaker + fixedPos;
+                    inputMarker.SetActive(true);
+                }
+                if (machineToPlace.outputMarker != null)
+                {
+                    outputMarker.transform.position = machineToPlace.outputMarker + fixedPos;
+                    outputMarker.SetActive(true);
+                }
+            }
+            curserObject.transform.position = fixedPos;
         }
-        curserObject.transform.position = new Vector3(fixedPos.x, fixedPos.y, 0);
+        else
+        {
+            outputMarker.SetActive(false);
+            inputMarker.SetActive(false);
+
+        }
     }
 
     private void OnEnable()
@@ -133,38 +178,40 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public int AddMoney(int money)
     {
-        int difference = 0;
-        if (currentMoney + money > maxMoney)
+        int actualMoney = money;
+
+        if (this.GetComponent<UnlockList>().IsUnlocked(UnlockList.Unlocks.twoMoney))
         {
-            difference = currentMoney + money - maxMoney;
-            currentMoney = 10;
+            actualMoney = money * 2;
+        }
+
+        int difference = 0;
+        if (currentMoney + actualMoney > maxMoney)
+        {
+            difference = currentMoney + actualMoney - maxMoney;
+            currentMoney = maxMoney;
         }
         else
         {
-            currentMoney += money;
+            currentMoney += actualMoney;
         }
         return difference;
     }
 
     public void HandleMenuEscape()
     {
-        if (building)
+        if (currentMode == GameState.Play)
         {
-            ClearBuildObject();
-            buildMenu.SetActive(true);
-            ClearBuildObject();
-        }
-        else if (buildMenu.activeSelf)
-        {
-            currentMode = GameState.Play;
-            buildMenu.SetActive(false);
-        }
-        else if (currentMode == GameState.WallBuy || currentMode == GameState.Build || currentMode == GameState.Trash)
-        {
-            buildMenu.SetActive(true);
+            pauseMenu.SetActive(true);
             currentMode = GameState.Pause;
-            currentMode = GameState.Play;
             Cursor.visible = true;
+        }
+        else
+        {
+            currentMode = GameState.Play;
+            pauseMenu.SetActive(false);
+            buildMenu.SetActive(false);
+            Cursor.visible = false;
         }
     }
 
@@ -219,7 +266,10 @@ public class GameManager : MonoBehaviour
     {
         buyNumber++;
         currentMoney -= wallValue;
-        wallValue = Mathf.FloorToInt(Mathf.Pow((float)buyNumber, wallValueFactorRange));
+        if (buyNumber > 3)
+        {
+            wallValue = Mathf.FloorToInt(Mathf.Pow((float)buyNumber - 3, wallValueFactorRange));
+        }
     }
 
     public void AddMachine(InputOutputMachine machine)
@@ -230,5 +280,28 @@ public class GameManager : MonoBehaviour
     public void RemoveMachine(InputOutputMachine machine)
     {
         machines.Remove(machine);
+    }
+
+    public void TryRotate()
+    {
+        if (machineToPlace != null && machineToPlace.GetRotation() != null)
+        {
+            machineToPlace = machineToPlace.GetRotation();
+        }
+    }
+
+    public void ToggleMusic()
+    {
+        musicOn = !musicOn;
+        musicPlayer.mute = !musicOn;
+    }
+    public void ToggleSound()
+    {
+        soundEffectsOn = !soundEffectsOn;
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
     }
 }

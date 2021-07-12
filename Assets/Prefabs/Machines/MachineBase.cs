@@ -6,16 +6,25 @@ public class MachineBase : MonoBehaviour
 {
     public bool jammed;
     public int cost;
+    public MachineBase nextRotation;
 
     // Shape of the machine
+    [SerializeField]
     public bool[,] shape;
 
     [SerializeField]
     public Vector3 offset;
     protected List<Vector3Int> blockedPositions = new List<Vector3Int>();
+    public int width;
+    public int height;
 
     protected GridManager grid;
     protected GameManager gm;
+
+    [SerializeField]
+    public Vector3 inputMaker;
+    [SerializeField]
+    public Vector3 outputMarker;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -25,16 +34,27 @@ public class MachineBase : MonoBehaviour
         this.tag = "Machine";
         if (shape == null)
         {
-            shape = GenerateGridRectangle(1, 1);
+            if (width == 0)
+                width = 1;
+            if (height == 0)
+                height = 1;
+
+            shape = GenerateGridRectangle(width, height);
         }
         SetBlockedPositions();
+
     }
 
     public virtual bool[,] GetShape()
     {
         if (shape == null)
         {
-            shape = GenerateGridRectangle(1, 1);
+            if (width == 0)
+                width = 1;
+            if (height == 0)
+                height = 1;
+
+            shape = GenerateGridRectangle(width, height);
         }
         return shape;
     }
@@ -51,7 +71,7 @@ public class MachineBase : MonoBehaviour
                     {
                         Vector3Int blockedPosition = grid.wallMap.WorldToCell(this.transform.position);
 
-                        grid.AddBlockedPosition(this.transform.position);
+                        grid.AddBlockedPosition(this.transform.position + new Vector3(-(width / 2) + i, -(height / 2) + j, 0));
                         blockedPositions.Add(blockedPosition);
                     }
                 }
@@ -77,7 +97,7 @@ public class MachineBase : MonoBehaviour
                     {
                         Vector3Int blockedPosition = grid.wallMap.WorldToCell(this.transform.position);
 
-                        grid.RemoveBlockedPosition(this.transform.position);
+                        grid.RemoveBlockedPosition(this.transform.position + new Vector3(-(width / 2) + i, -(height / 2) + j, 0));
                         blockedPositions.Add(blockedPosition);
                     }
                 }
@@ -120,5 +140,10 @@ public class MachineBase : MonoBehaviour
     {
         if (gm.currentMode == GameManager.GameState.Trash)
             GameObject.Destroy(this.gameObject);
+    }
+
+    public MachineBase GetRotation()
+    {
+        return nextRotation;
     }
 }

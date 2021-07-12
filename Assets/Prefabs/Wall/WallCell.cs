@@ -8,7 +8,7 @@ public class WallCell : MonoBehaviour
     private GridManager grid;
     private GameManager gm;
 
-    public RuleTile floorTile;
+    public TileBase floorTile;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +18,10 @@ public class WallCell : MonoBehaviour
     }
 
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (gm.currentMode == GameManager.GameState.WallBuy && CanDestory() && grid.gm.CanBuyWall())
+        if (gm.currentMode == GameManager.GameState.WallBuy && CanDestory() && grid.gm.CanBuyWall() && 
+            grid.buildMap.GetComponent<BuildMapManager>().canBuild && Input.GetMouseButton(0))
         {
             grid.BreakWall(grid.wallMap.WorldToCell(this.transform.parent.position));
         }
