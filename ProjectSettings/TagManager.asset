@@ -48,3 +48,6 @@ TagManager:
   - name: BuildingLayer
     uniqueID: 1445985693
     locked: 0
+  - name: Effect
+    uniqueID: 2942336713
+    locked: 0

@@ -18,9 +18,10 @@ public class WallCell : MonoBehaviour
     }
 
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (gm.currentMode == GameManager.GameState.WallBuy && CanDestory() && grid.gm.CanBuyWall() && grid.buildMap.GetComponent<BuildMapManager>().canBuild)
+        if (gm.currentMode == GameManager.GameState.WallBuy && CanDestory() && grid.gm.CanBuyWall() && 
+            grid.buildMap.GetComponent<BuildMapManager>().canBuild && Input.GetMouseButton(0))
         {
             grid.BreakWall(grid.wallMap.WorldToCell(this.transform.parent.position));
         }

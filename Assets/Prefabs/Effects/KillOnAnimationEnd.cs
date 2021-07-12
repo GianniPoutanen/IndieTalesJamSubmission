@@ -6,6 +6,7 @@ public class KillOnAnimationEnd : MonoBehaviour
 {
     public void DestroyMe()
     {
+        this.gameObject.SetActive(false);
         GameObject.Destroy(this.gameObject);
     }
 }

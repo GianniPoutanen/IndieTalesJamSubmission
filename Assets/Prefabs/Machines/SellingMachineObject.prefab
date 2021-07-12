@@ -136,7 +136,7 @@ MonoBehaviour:
   machine: {fileID: 8483506606956576224}
   drawGizmoMarkers: 0
   gm: {fileID: 0}
-  maxValue: 10
+  maxValue: 1000
   heldValue: 0
 --- !u!114 &8483506606956576224
 MonoBehaviour:
@@ -156,6 +156,8 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   width: 1
   height: 1
+  inputMaker: {x: 0, y: 0, z: 0}
+  outputMarker: {x: 0, y: 0, z: 0}
 --- !u!61 &-659938641258635227
 BoxCollider2D:
   m_ObjectHideFlags: 0

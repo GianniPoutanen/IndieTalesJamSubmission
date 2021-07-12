@@ -22,7 +22,11 @@ public class GameManager : MonoBehaviour
     public bool building;
     public GameObject buildingIndicator;
 
+    public GameObject inputMarker;
+    public GameObject outputMarker;
+
     public List<InputOutputMachine> machines = new List<InputOutputMachine>();
+    GridManager grid;
 
     [Header("Timer Variables")]
     public float tickTime = 2;
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         tickTimer = tickTime;
+        grid = GameObject.Find("Grid").GetComponent<GridManager>();
     }
 
     private void Update()
@@ -85,9 +90,10 @@ public class GameManager : MonoBehaviour
 
         SetCurserObjectPosition();
 
-        if (building && Input.GetMouseButtonDown(0) && CanBuildMachine())
+        if (building && Input.GetMouseButtonDown(0))
         {
-            HandleBuildMachine();
+            if (CanBuildMachine() && grid.buildMap.GetComponent<BuildMapManager>().canBuild)
+                HandleBuildMachine();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -117,7 +123,8 @@ public class GameManager : MonoBehaviour
         if (!Input.GetKey(KeyCode.LeftShift))
         {
             ClearBuildObject();
-            currentMode = GameState.Play;
+            currentMode = GameState.Pause;
+            buildMenu.SetActive(true);
         }
     }
 
@@ -130,8 +137,25 @@ public class GameManager : MonoBehaviour
             if (building)
             {
                 fixedPos = Vector3Int.RoundToInt(fixedPos);
+                fixedPos = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
+                if (machineToPlace.inputMaker != null)
+                {
+                    inputMarker.transform.position = machineToPlace.inputMaker + fixedPos;
+                    inputMarker.SetActive(true);
+                }
+                if (machineToPlace.outputMarker != null)
+                {
+                    outputMarker.transform.position = machineToPlace.outputMarker + fixedPos;
+                    outputMarker.SetActive(true);
+                }
             }
-            curserObject.transform.position = new Vector3(fixedPos.x - ((1 + machineToPlace.width % 2) * 0.5f), fixedPos.y - ((1 + machineToPlace.height % 2) * 0.5f), 0);
+            curserObject.transform.position = fixedPos;
+        }
+        else
+        {
+            outputMarker.SetActive(false);
+            inputMarker.SetActive(false);
+
         }
     }
 
@@ -146,39 +170,31 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public int AddMoney(int money)
     {
-        int difference = 0;
-        if (currentMoney + money > maxMoney)
+        int actualMoney = money;
+
+        if (this.GetComponent<UnlockList>().IsUnlocked(UnlockList.Unlocks.twoMoney))
         {
-            difference = currentMoney + money - maxMoney;
+            actualMoney = money * 2;
+        }
+
+        int difference = 0;
+        if (currentMoney + actualMoney > maxMoney)
+        {
+            difference = currentMoney + actualMoney - maxMoney;
             currentMoney = maxMoney;
         }
         else
         {
-            currentMoney += money;
+            currentMoney += actualMoney;
         }
         return difference;
     }
 
     public void HandleMenuEscape()
     {
-        if (building)
-        {
-            ClearBuildObject();
-            buildMenu.SetActive(true);
-            ClearBuildObject();
-        }
-        else if (buildMenu.activeSelf)
-        {
-            currentMode = GameState.Play;
-            buildMenu.SetActive(false);
-        }
-        else if (currentMode == GameState.WallBuy || currentMode == GameState.Build || currentMode == GameState.Trash)
-        {
-            buildMenu.SetActive(true);
-            currentMode = GameState.Pause;
-            currentMode = GameState.Play;
-            Cursor.visible = true;
-        }
+        currentMode = GameState.Play;
+        buildMenu.SetActive(false);
+        Cursor.visible = false;
     }
 
     public void SetBuyWallMode()

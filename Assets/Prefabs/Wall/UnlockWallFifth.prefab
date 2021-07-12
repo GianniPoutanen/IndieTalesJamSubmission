@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   replacementWall: {fileID: 11400000, guid: a4206ab1ceff9304894ecc1815817170, type: 2}
-  WallBuildUnlockNumber: 221
+  WallBuildUnlockNumber: 249

@@ -21,6 +21,11 @@ public class MachineBase : MonoBehaviour
     protected GridManager grid;
     protected GameManager gm;
 
+    [SerializeField]
+    public Vector3 inputMaker;
+    [SerializeField]
+    public Vector3 outputMarker;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -92,7 +97,7 @@ public class MachineBase : MonoBehaviour
                     {
                         Vector3Int blockedPosition = grid.wallMap.WorldToCell(this.transform.position);
 
-                        grid.RemoveBlockedPosition(this.transform.position);
+                        grid.RemoveBlockedPosition(this.transform.position + new Vector3(-(width / 2) + i, -(height / 2) + j, 0));
                         blockedPositions.Add(blockedPosition);
                     }
                 }

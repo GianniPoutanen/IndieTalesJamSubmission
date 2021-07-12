@@ -39,7 +39,7 @@ public class PlayerMovemet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (grid.CheckPositionFree(this.transform.position + new Vector3(0, 1, 0)))
+            if (grid.CheckPositionFree(endPosition + new Vector3(0, 1, 0)))
             {
                 endPosition += new Vector3Int(0, 1, 0);
             }
@@ -60,7 +60,7 @@ public class PlayerMovemet : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (grid.CheckPositionFree(this.transform.position + new Vector3(0, -1, 0)))
+            if (grid.CheckPositionFree(endPosition + new Vector3(0, -1, 0)))
             {
                 endPosition += new Vector3Int(0, -1, 0);
             }
@@ -82,7 +82,7 @@ public class PlayerMovemet : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            if (grid.CheckPositionFree(this.transform.position + new Vector3(1, 0, 0)))
+            if (grid.CheckPositionFree(endPosition + new Vector3(1, 0, 0)))
             {
                 endPosition += new Vector3Int(1, 0, 0);
             }
@@ -104,7 +104,7 @@ public class PlayerMovemet : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
-            if (grid.CheckPositionFree(this.transform.position + new Vector3(-1, 0, 0)))
+            if (grid.CheckPositionFree(endPosition + new Vector3(-1, 0, 0)))
             {
                 endPosition += new Vector3Int(-1, 0, 0);
             }

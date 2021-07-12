@@ -107,6 +107,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: -2344824582362086267, guid: 869d57ced57f2af46937081d91793330,
       type: 3}
     sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
@@ -117,6 +118,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 4939955736737980522, guid: adfcfa0459a156e4eaa0c7bc02b24235,
       type: 3}
@@ -126,6 +128,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 294900110765676944, guid: adfcfa0459a156e4eaa0c7bc02b24235, type: 3}
   - type: 0
@@ -134,6 +137,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 4939955736737980522, guid: adfcfa0459a156e4eaa0c7bc02b24235,
       type: 3}
@@ -143,6 +147,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 294900110765676944, guid: adfcfa0459a156e4eaa0c7bc02b24235, type: 3}
   - type: 0
@@ -151,6 +156,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 4939955736737980522, guid: adfcfa0459a156e4eaa0c7bc02b24235,
       type: 3}
@@ -160,6 +166,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 294900110765676944, guid: adfcfa0459a156e4eaa0c7bc02b24235, type: 3}
   - type: 5
@@ -168,6 +175,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 763780922061634207, guid: b30f6ca33a75a424b9d109297afc59a7,
       type: 3}
     sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
@@ -178,6 +186,7 @@ MonoBehaviour:
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 4620696175837412934, guid: adfcfa0459a156e4eaa0c7bc02b24235,
       type: 3}
@@ -200,11 +209,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
-  cost: 40
+  cost: 100
   nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   width: 0
   height: 0
+  inputMaker: {x: 0, y: 0, z: 0}
+  outputMarker: {x: 0, y: 0, z: 0}
 --- !u!61 &2304285069698673589
 BoxCollider2D:
   m_ObjectHideFlags: 0
