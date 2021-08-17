@@ -31,6 +31,10 @@ public class InputOutputMachine : MonoBehaviour
         machine = this.GetComponent<MachineBase>();
     }
 
+    private void OnDestroy()
+    {
+        gm.RemoveMachine(this);
+    }
 
     // Update is called once per frame
     void Update()
@@ -62,7 +66,7 @@ public class InputOutputMachine : MonoBehaviour
         {
             if (this.CurrentStage().type == Stage.StageType.Processs)
             {
-                if (heldItem == null)
+                if (heldItem != this.CurrentStage().processItem)
                 {
                     heldItem = this.CurrentStage().processItem;
                     StageNext();
@@ -92,7 +96,7 @@ public class InputOutputMachine : MonoBehaviour
             {
                 if (heldItem != null)
                 {
-                    gm.currentMoney = heldItem.value; 
+                    gm.currentMoney = heldItem.value;
                     heldItem = null;
                 }
                 StageNext();
@@ -103,6 +107,7 @@ public class InputOutputMachine : MonoBehaviour
             }
         }
     }
+
     public void StageUpdateFinished()
     {
         if (itemBuffer != null && heldItem == null)
@@ -176,7 +181,7 @@ public class InputOutputMachine : MonoBehaviour
         foreach (Out output in stages[stageIndex].outputs)
         {
             InputOutputMachine machine = GetMachineAtPoint(this.transform.position + output.pos);
-            if (machine != null && !machine.CanAcceptInput(this.transform.position, this.transform.position + output.pos))
+            if (machine != null && !machine.CanAcceptInput(this.transform.position, this.transform.position + output.pos, this.heldItem))
             {
                 return false;
             }
@@ -187,7 +192,7 @@ public class InputOutputMachine : MonoBehaviour
 
     public bool CanOutput(Vector3 machinePos, Vector3 outputPosition)
     {
-        if (heldItem != null)
+        if (heldItem != null && CurrentStage().type == Stage.StageType.Out)
         {
             if (!this.CurrentStage().outputRestricted)
                 return true;
@@ -203,18 +208,18 @@ public class InputOutputMachine : MonoBehaviour
         return false;
     }
 
-    public virtual bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition)
+    public virtual bool CanAcceptInput(Vector3 machinePos, Vector3 inputPosition, Item item)
     {
-        if (itemBuffer == null)
+        if (itemBuffer == null && CurrentStage().type == Stage.StageType.In)
         {
             if (!this.CurrentStage().inputRestricted)
-                return true;
+                return this.CurrentStage().inputTypeRestriction == null || item == this.CurrentStage().inputTypeRestriction;
 
             foreach (In input in this.CurrentStage().inputs)
             {
                 if ((input.pos + this.transform.position) == machinePos && this.transform.position == inputPosition)
                 {
-                    return true;
+                    return this.CurrentStage().inputTypeRestriction == null || item == this.CurrentStage().inputTypeRestriction;
                 }
             }
         }
@@ -223,10 +228,13 @@ public class InputOutputMachine : MonoBehaviour
 
     public static InputOutputMachine GetMachineAtPoint(Vector3 pos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
-        if (hit.transform != null && hit.transform.gameObject != null)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(pos, Vector2.zero, 0f);
+        foreach (RaycastHit2D hit in hits)
         {
-            return hit.transform.gameObject.GetComponent<InputOutputMachine>();
+            if (hit.transform != null && hit.transform.gameObject != null && hit.transform.tag == "Machine")
+            {
+                return hit.transform.gameObject.GetComponent<InputOutputMachine>();
+            }
         }
         return null;
     }
@@ -278,9 +286,12 @@ public class Stage
     public StageType type;
 
     public bool inputRestricted = false;
+    public Item inputTypeRestriction;
     public In[] inputs;
     public bool outputRestricted = false;
     public Out[] outputs;
+
+    public GameObject effect;
 
     public Item processItem;
 

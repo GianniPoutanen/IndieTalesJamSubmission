@@ -101,25 +101,32 @@ MonoBehaviour:
   stages:
   - type: 7
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 7812645641711309682, guid: 52cef87d8f462934e9976f25f3fd72d0,
+      type: 3}
     processItem: {fileID: 0}
     sprite: {fileID: -8857580367851452815, guid: 3c3a721faf751324fbde6574bace801a,
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: -5965451534639150018, guid: 3c3a721faf751324fbde6574bace801a,
       type: 3}
   - type: 0
     inputRestricted: 0
+    inputTypeRestriction: {fileID: 0}
     inputs: []
     outputRestricted: 0
     outputs: []
+    effect: {fileID: 0}
     processItem: {fileID: 0}
     sprite: {fileID: 7772417466780860108, guid: 3c3a721faf751324fbde6574bace801a,
       type: 3}
@@ -129,7 +136,7 @@ MonoBehaviour:
   machine: {fileID: 8483506606956576224}
   drawGizmoMarkers: 0
   gm: {fileID: 0}
-  maxValue: 10
+  maxValue: 1000
   heldValue: 0
 --- !u!114 &8483506606956576224
 MonoBehaviour:
@@ -144,7 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammed: 0
+  cost: 5
+  nextRotation: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  width: 1
+  height: 1
+  inputMaker: {x: 0, y: 0, z: 0}
+  outputMarker: {x: 0, y: 0, z: 0}
 --- !u!61 &-659938641258635227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -161,7 +174,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5

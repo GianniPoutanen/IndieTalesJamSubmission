@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Machine
   layers:
   - Default
   - TransparentFX
@@ -38,12 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Controls
+    uniqueID: 417455269
+    locked: 0
   - name: Floor
     uniqueID: 4174547963
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UnlockTiles
-    uniqueID: 1125506367
+  - name: BuildingLayer
+    uniqueID: 1445985693
+    locked: 0
+  - name: Effect
+    uniqueID: 2942336713
     locked: 0
